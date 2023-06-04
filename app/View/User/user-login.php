@@ -20,7 +20,7 @@
             >
               Selamat Datang
             </h1>
-            <form class="space-y-4 md:space-y-6" action="#">
+            <form class="space-y-4 md:space-y-6" method="post">
               <div>
                 <label
                   for="email"
