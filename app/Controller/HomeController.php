@@ -1,11 +1,14 @@
 <?php
 
 namespace PalaganTeam\MuhKansai\Controller;
+
+use PalaganTeam\MuhKansai\App\View;
+
 class HomeController{
     /**
      * Web Home/Profile Page
      */
     public function index(){
-        echo "index page";
+        View::render('User/user-login');
     }
 }
