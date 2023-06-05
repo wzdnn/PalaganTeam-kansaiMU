@@ -9,6 +9,6 @@ class HomeController{
      * Web Home/Profile Page
      */
     public function index(){
-        View::render('User/user-login');
+        View::render('Home/index');
     }
 }
