@@ -3,7 +3,7 @@
 namespace PalaganTeam\MuhKansai\Service;
 
 use PalaganTeam\MuhKansai\Model\User\UserLoginRequest;
-use PalaganTeam\MuhKansai\Model\User\UserLoginRespons;
+use PalaganTeam\MuhKansai\Model\User\UserLoginResponse;
 use PalaganTeam\MuhKansai\Repository\UserRepository;
 
 /**
@@ -23,7 +23,7 @@ class UserService{
      * 
      * Mengelola login page saat POST
      */
-    public function login(UserLoginRequest $req): UserLoginRespons{
+    public function login(UserLoginRequest $req): UserLoginResponse{
         // validation input
         $this->loginValidation($req);
         $user = $this->userRepository->findByEmail($req->email);
@@ -35,7 +35,7 @@ class UserService{
         
         // check password
         if($req->password == $user->userPassw){
-            $response = new UserLoginRespons;
+            $response = new UserLoginResponse;
             $response->username = $user->userEmail;
             $response->level = $user->userLevel;
 
