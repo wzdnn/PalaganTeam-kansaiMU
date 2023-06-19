@@ -2,8 +2,11 @@
 
 namespace PalaganTeam\MuhKansai\Service;
 
+use PalaganTeam\MuhKansai\Config\Database;
+use PalaganTeam\MuhKansai\Domain\User;
 use PalaganTeam\MuhKansai\Model\User\UserLoginRequest;
 use PalaganTeam\MuhKansai\Model\User\UserLoginResponse;
+use PalaganTeam\MuhKansai\Model\User\UserRegisterRequest;
 use PalaganTeam\MuhKansai\Repository\UserRepository;
 
 /**
@@ -34,7 +37,7 @@ class UserService{
         }
         
         // check password
-        if($req->password == $user->userPassw){
+        if(password_verify($req->password, $user->userPassw)){
             $response = new UserLoginResponse;
             $response->username = $user->userEmail;
             $response->level = $user->userLevel;
@@ -50,6 +53,47 @@ class UserService{
      * Login Validation
      */
     private function loginValidation(UserLoginRequest $req): void{
+        if($req->email == null || $req->email == ''){
+            throw new \Exception('Email is empty!');
+        }
+        
+        if($req->password == null || $req->password == ''){
+            throw new \Exception('Password is empty!');
+        }
+    }
+
+    /**
+     * Register Service
+     * 
+     * Fungsi untuk mengelola data Register
+     */
+    public function register(UserRegisterRequest $req): void{
+        $this->registerValidation($req);
+
+        try{
+            Database::beginTransaction();
+
+            // check email
+            if($this->userRepository->findByEmail($req->email) != null){
+                throw new \Exception('Email sudah pernah dibuat');
+            }
+
+            $user = new User;
+            $user->userEmail = $req->email;
+            $user->userPassw = password_hash($req->password, PASSWORD_BCRYPT);
+
+            $this->userRepository->save($user);
+            Database::commitTransaction();
+        } catch(\Exception $ex){
+            Database::rollbackTransaction();
+            throw $ex;
+        }
+    }
+
+    /**
+     * Register Validation
+     */
+    private function registerValidation(UserRegisterRequest $req): void{
         if($req->email == null || $req->email == ''){
             throw new \Exception('Email is empty!');
         }
