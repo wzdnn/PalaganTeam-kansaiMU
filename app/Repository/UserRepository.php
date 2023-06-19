@@ -18,6 +18,21 @@ class UserRepository{
         $this->connection = $connection;
     }
 
+    
+    /**
+     * Save Data Account
+     * 
+     * Menyimpan data ke DB
+     * @return User
+     */
+    public function save(User $user): User{
+        $stmt = $this->connection->prepare('INSERT INTO account(email, password) VALUES(?, ?)');
+        $stmt->execute([$user->userEmail, $user->userPassw]);
+
+        return $user;
+    }
+
+
     /**
      * Search Data by email
      * 
@@ -44,5 +59,45 @@ class UserRepository{
         } finally{
             $stmt->closeCursor();
         }
+    }
+
+
+    /**
+     * Get All Data
+     * 
+     * Ambil semua data account
+     * @return array | null
+     */
+    public function getAll(): ?array{
+        $stmt = $this->connection->prepare('SELECT * FROM account');
+        $stmt->execute();
+
+        try{
+            if($row = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+                foreach($row as $data){
+                    $array[] = $data;
+                }
+    
+                return $array;
+            }else{
+                return null;
+            }
+        } finally{
+            $stmt->closeCursor();
+        }
+    }
+
+    
+    /**
+     * Update User Data
+     * 
+     * Update data berdasarkan atrribute email
+     * @return User
+     */
+    public function updatePassword(User $user): User{
+        $stmt = $this->connection->prepare('UPDATE account SET password = ? WHERE email = ?');
+        $stmt->execute([$user->userPassw, $user->userEmail]);
+
+        return $user;
     }
 }
