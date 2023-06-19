@@ -1,0 +1,25 @@
+{
+    "name": "palagan_team/muh_kansai",
+    "description": "Rebuild Website Muhammdaiyah Kansai by Palagan Team",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "PalaganTeam\\MuhKansai\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daffa Alif Murtaja",
+            "email": "daffaalif1239@gmail.com",
+            "role": "Backend"
+        },
+        {
+            "name": "Zidan",
+            "email": "email@gmail.com",
+            "role": "Frontend"
+        }
+    ],
+    "require": {
+        "php": ">=8"
+    }
+}
