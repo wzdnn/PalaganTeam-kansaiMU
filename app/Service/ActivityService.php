@@ -58,5 +58,27 @@ class ActivityService{
                 }
             }
         }
+
+        if($req->activityLink == null || $req->activityLink == ''){
+            $req->activityLink = null;
+        }else{
+            foreach ($req->activityLink as $key => $value) {
+                if($value == null || trim($value) == ''){
+                    throw new \Exception('link cannot be empty');
+                }
+            }
+        }
+
+        if(isset($req->activityLink) || isset($req->activityJudulLink)){
+            if(!isset($req->activityLink)){
+                throw new \Exception('link title array cannot be empty');
+            }
+            if(!isset($req->activityJudulLink)){
+                throw new \Exception('link array cannot be empty');
+            }
+            if(count($req->activityJudulLink) != count($req->activityLink)){
+                throw new \Exception('one of the links is missing, please fill in');
+            }
+        }
     }
 }
