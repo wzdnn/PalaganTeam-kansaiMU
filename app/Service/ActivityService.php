@@ -2,6 +2,7 @@
 
 namespace PalaganTeam\MuhKansai\Service;
 
+use PalaganTeam\MuhKansai\App\DotEnv;
 use PalaganTeam\MuhKansai\Domain\Activity;
 use PalaganTeam\MuhKansai\Model\Activity\ActivityCreateRequest;
 use PalaganTeam\MuhKansai\Repository\ActivityRepository;
@@ -25,13 +26,16 @@ class ActivityService{
         try{
             $activity = new Activity;
             $activity->namaActivity = $req->activityName;
-            $activity->tanggalPembuatan = '2023/01/31';
+
+            // get timezone
+            DotEnv::getTimezoneArea();
+            $activity->tanggalPembuatan = date('Y/m/d H:i:s');
 
             // detail activity
             $detail = [
-                'tanggal' => $req->activityTanggal,
-                'time-start' => $req->activityTimeStart,
-                'time-end' => $req->activityTimeEnd,
+                'tanggal' => date('d M Y', strtotime($req->activityTanggal)),
+                'time-start' => date('H:i', strtotime($req->activityTimeStart)),
+                'time-end' => date('H:i', strtotime($req->activityTimeEnd)),
                 'desc' => $req->activityDeskripsi,
                 'links' => $this->activityLinkLogic($req)
             ];
