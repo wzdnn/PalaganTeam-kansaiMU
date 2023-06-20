@@ -2,6 +2,7 @@
 
 namespace PalaganTeam\MuhKansai\Service;
 
+use PalaganTeam\MuhKansai\Domain\Activity;
 use PalaganTeam\MuhKansai\Model\Activity\ActivityCreateRequest;
 use PalaganTeam\MuhKansai\Repository\ActivityRepository;
 
@@ -19,12 +20,42 @@ class ActivityService{
      * Service logic untuk membuat activity
      */
     public function createActivity(ActivityCreateRequest $req){
-        // detail activity
-        $detail = [];
+        $this->validationCreateActivity($req);
 
+        try{
+            $activity = new Activity;
+            $activity->namaActivity = $req->activityName;
+            $activity->tanggalPembuatan = '2023/01/31';
+
+            // detail activity
+            $detail = [
+                'tanggal' => $req->activityTanggal,
+                'time-start' => $req->activityTimeStart,
+                'time-end' => $req->activityTimeEnd,
+                'desc' => $req->activityDeskripsi,
+                'links' => $this->activityLinkLogic($req)
+            ];
+            $activity->detailActivity = serialize($detail);
+
+            // history activity default
+            $history = [
+                'last-update' => 'Create',
+                'history' => [
+                    'Create by ' . 'nama orang'
+                ]
+            ];
+            $activity->historyActivity = serialize($history);
+
+            $this->activityRepo->save($activity);
+        } catch(\Exception $ex){
+            throw $ex;
+        }
     }
 
-    public function validationCreateActivity(ActivityCreateRequest $req){
+    /**
+     * Validasi activity input form
+     */
+    private function validationCreateActivity(ActivityCreateRequest $req){
         if($req->activityName == null || trim($req->activityName) == ''){
             throw new \Exception('activity cannot be empty');
         }
@@ -43,10 +74,6 @@ class ActivityService{
 
         if($req->activityDeskripsi == null || trim($req->activityDeskripsi) == ''){
             throw new \Exception('description cannot be empty');
-        }
-
-        if($req->activityLokasi == null || trim($req->activityLokasi) == ''){
-            throw new \Exception('location cannot be empty');
         }
 
         if($req->activityJudulLink == null || $req->activityJudulLink == ''){
@@ -80,5 +107,26 @@ class ActivityService{
                 throw new \Exception('one of the links is missing, please fill in');
             }
         }
+    }
+
+    /**
+     * Activity Links Logic
+     * 
+     * Fungsi untuk menghandel links
+     * @return  array
+     */
+    private function activityLinkLogic(ActivityCreateRequest $req): array{
+        $this->validationCreateActivity($req);
+        $links = [];
+        if(isset($req->activityJudulLink)){
+            for($i = 0; $i < count($req->activityJudulLink); $i++){
+                $links[] = [
+                    'judul' => $req->activityJudulLink,
+                    'link' => $req->activityLink
+                ];
+            }
+        }
+
+        return $links;
     }
 }
