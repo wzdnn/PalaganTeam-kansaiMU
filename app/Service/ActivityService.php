@@ -3,8 +3,10 @@
 namespace PalaganTeam\MuhKansai\Service;
 
 use PalaganTeam\MuhKansai\App\DotEnv;
+use PalaganTeam\MuhKansai\Config\Database;
 use PalaganTeam\MuhKansai\Domain\Activity;
 use PalaganTeam\MuhKansai\Model\Activity\ActivityCreateRequest;
+use PalaganTeam\MuhKansai\Model\Activity\ActivityUpdateRequest;
 use PalaganTeam\MuhKansai\Repository\ActivityRepository;
 
 class ActivityService{
@@ -45,7 +47,7 @@ class ActivityService{
             $history = [
                 'last-update' => 'Create',
                 'history' => [
-                    'Create by ' . 'nama orang'
+                    'Create by ' . 'nama orang, ' . date('d M Y H:i:s')
                 ]
             ];
             $activity->historyActivity = serialize($history);
@@ -132,5 +134,62 @@ class ActivityService{
         }
 
         return $links;
+    }
+
+    /**
+     * Update Activity
+     * 
+     * Service untuk menghandel update
+     */
+    public function updateActivity(ActivityUpdateRequest $req){
+        $this->validationCreateActivity($req);
+        $this->validationUpdateActivity($req);
+
+        try{
+            $activity = new Activity;
+            // id target activity
+            $activity->idActivity = $req->acitivityId;
+
+            // name activity
+            $activity->namaActivity = $req->activityName;
+
+            // detail activity
+            $detail = [
+                'tanggal' => date('d M Y', strtotime($req->activityTanggal)),
+                'time-start' => date('H:i', strtotime($req->activityTimeStart)),
+                'time-end' => date('H:i', strtotime($req->activityTimeEnd)),
+                'desc' => $req->activityDeskripsi,
+                'links' => $this->activityLinkLogic($req)
+            ];
+            $activity->detailActivity = serialize($detail);
+
+            Database::beginTransaction();
+            // history
+            $activityDB = $this->activityRepo->findById($req->acitivityId);
+            $history = unserialize($activityDB->historyActivity);
+            
+            DotEnv::getTimezoneArea();
+            $history['last-update'] = 'Update';
+            array_push($history['history'], 'Update by ' . 'nama orang, ' . date('d M Y H:i:s'));
+            $activity->historyActivity = serialize($history);
+            
+            $this->activityRepo->update($activity);
+            Database::commitTransaction();
+            return $activity;
+        } catch(\Exception $ex){
+            // Database::rollbackTransaction();
+            throw $ex;
+        }
+    }
+
+    /**
+     * Update validation
+     */
+    private function validationUpdateActivity(ActivityUpdateRequest $req){
+        if($req->acitivityId == null || $req->acitivityId == ''){
+            throw new \Exception('id activity cannot be empty');
+        }else if(is_string($req->acitivityId)){
+            throw new \Exception('id activity cannot be type of string');
+        }
     }
 }

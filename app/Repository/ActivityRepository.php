@@ -73,4 +73,13 @@ class ActivityRepository{
         }
     }
     
+    /**
+     * Update activity by id
+     * 
+     * Update data activity berdasarkan ID
+     */
+    public function update(Activity $activity){
+        $stmt = $this->connection->prepare('UPDATE activity SET nama_activity = ?, detail_activity = ?, history_activity = ? WHERE id = ?');
+        $stmt->execute([$activity->namaActivity, $activity->detailActivity, $activity->historyActivity, $activity->idActivity]);
+    }
 }
