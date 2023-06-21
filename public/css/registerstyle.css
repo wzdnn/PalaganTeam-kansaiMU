@@ -1,0 +1,44 @@
+body {
+  background: #1e73be;
+  font-family: Helvetica, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 900em;
+}
+
+.form-floating i {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  visibility: hidden;
+}
+
+.form-floating.success i.fa-check-circle {
+  color: #2ecc71;
+  visibility: visible;
+}
+
+.form-floating.error i.fa-exclamation-circle {
+  color: #be2020;
+  visibility: visible;
+}
+
+.form-floating.error small {
+  visibility: visible;
+}
+
+.form-floating small {
+  color: #be2020;
+  margin-left: 10px;
+  visibility: hidden;
+}
+
+.form-floating.success input {
+  border-color: #2ecc71;
+}
+
+.form-floating.error input {
+  border-color: #be2020;
+}
