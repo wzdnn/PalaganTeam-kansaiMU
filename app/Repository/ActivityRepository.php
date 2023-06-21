@@ -78,8 +78,20 @@ class ActivityRepository{
      * 
      * Update data activity berdasarkan ID
      */
-    public function update(Activity $activity){
+    public function update(Activity $activity): bool{
         $stmt = $this->connection->prepare('UPDATE activity SET nama_activity = ?, detail_activity = ?, history_activity = ? WHERE id = ?');
-        $stmt->execute([$activity->namaActivity, $activity->detailActivity, $activity->historyActivity, $activity->idActivity]);
+
+        return $stmt->execute([$activity->namaActivity, $activity->detailActivity, $activity->historyActivity, $activity->idActivity]);
+    }
+
+    /**
+     * Delete activity by id
+     * 
+     * Hapus data activity bedasarkan ID
+     */
+    public function delete(int $id): bool{
+        $stmt = $this->connection->prepare('DELETE FROM activity WHERE id = ?');
+        
+        return $stmt->execute([$id]);
     }
 }

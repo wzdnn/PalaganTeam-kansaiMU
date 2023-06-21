@@ -6,6 +6,7 @@ use PalaganTeam\MuhKansai\App\DotEnv;
 use PalaganTeam\MuhKansai\Config\Database;
 use PalaganTeam\MuhKansai\Domain\Activity;
 use PalaganTeam\MuhKansai\Model\Activity\ActivityCreateRequest;
+use PalaganTeam\MuhKansai\Model\Activity\ActivityDeleteRequest;
 use PalaganTeam\MuhKansai\Model\Activity\ActivityUpdateRequest;
 use PalaganTeam\MuhKansai\Repository\ActivityRepository;
 
@@ -190,6 +191,22 @@ class ActivityService{
             throw new \Exception('id activity cannot be empty');
         }else if(is_string($req->acitivityId)){
             throw new \Exception('id activity cannot be type of string');
+        }
+    }
+
+    /**
+     * Delete Activity
+     * 
+     * Service yang menhandel penghapusan activity
+     */
+    public function delete(ActivityDeleteRequest $req): bool{
+        $this->validationUpdateActivity($req);
+
+        try{
+            $this->activityRepo->delete($req->acitivityId);
+            return true;
+        } catch(\Exception $ex){
+            throw $ex;
         }
     }
 }
