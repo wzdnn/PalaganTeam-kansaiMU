@@ -22,16 +22,29 @@ class UserRepository{
     /**
      * Save Data Account
      * 
-     * Menyimpan data ke DB
+     * Menyimpan data ke tabel account
      * @return User
      */
-    public function save(User $user): User{
-        $stmt = $this->connection->prepare('INSERT INTO account(email, password) VALUES(?, ?)');
-        $stmt->execute([$user->userEmail, $user->userPassw]);
+    public function saveAccount(User $user, string $vkey): User{
+        $stmt = $this->connection->prepare('INSERT INTO account(email, password, vkey, verified, access_level) VALUES(?, ?, ?, ?, ?)');
+        $stmt->execute([$user->userEmail, $user->userPassw, $vkey, 0, 0]);
 
         return $user;
     }
 
+
+    /**
+     * Save Data Account Details
+     * 
+     * Menyimpan data ke tabel account details
+     */
+    public function saveAccountDetails(User $user, string $timeCreate): User{
+        $stmt = $this->connection->prepare('INSERT INTO account_details(email, fullname, create_at) VALUES(?, ?, ?)');
+        $stmt->execute([$user->userEmail, $user->userName, $timeCreate]);
+
+        return $user;
+    }
+    
 
     /**
      * Search Data by email

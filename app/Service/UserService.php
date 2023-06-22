@@ -2,6 +2,7 @@
 
 namespace PalaganTeam\MuhKansai\Service;
 
+use PalaganTeam\MuhKansai\App\DotEnv;
 use PalaganTeam\MuhKansai\Config\Database;
 use PalaganTeam\MuhKansai\Domain\User;
 use PalaganTeam\MuhKansai\Model\User\UserLoginRequest;
@@ -80,9 +81,16 @@ class UserService{
 
             $user = new User;
             $user->userEmail = $req->email;
+            $user->userName = $req->fullname;
             $user->userPassw = password_hash($req->password, PASSWORD_BCRYPT);
+            
+            // vkey generate
+            $vkey = md5(time() . $req->email);
 
-            $this->userRepository->save($user);
+            DotEnv::getTimezoneArea();
+
+            $this->userRepository->saveAccount($user, $vkey);
+            $this->userRepository->saveAccountDetails($user, date('Y/m/d H:i:s'));
             Database::commitTransaction();
         } catch(\Exception $ex){
             Database::rollbackTransaction();
@@ -95,11 +103,17 @@ class UserService{
      */
     private function registerValidation(UserRegisterRequest $req): void{
         if($req->email == null || $req->email == ''){
-            throw new \Exception('Email is empty!');
+            throw new \Exception('Email cannot be empty!');
         }
         
         if($req->password == null || $req->password == ''){
-            throw new \Exception('Password is empty!');
+            throw new \Exception('Password cannot be empty!');
+        }
+
+        if($req->rePassword == null || $req->rePassword == ''){
+            throw new \Exception('RePassword cannot be empty!');
+        }else if($req->password != $req->rePassword){
+            throw new \Exception('Passwords are not the same!');
         }
     }
 }
