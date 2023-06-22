@@ -38,6 +38,10 @@ class UserService{
             throw new \Exception('Email or Password is wrong');
         }
         
+        if($user->userData == 0){
+            throw new \Exception('Account not verified');
+        }
+
         // check password
         if(password_verify($req->password, $user->userPassw)){
             $response = new UserLoginResponse;
@@ -157,6 +161,28 @@ class UserService{
             throw new \Exception('RePassword cannot be empty!');
         }else if($req->password != $req->rePassword){
             throw new \Exception('Passwords are not the same!');
+        }
+    }
+
+    /**
+     * Account Verified
+     * 
+     * Service untuk mengelola verified account
+     */
+    public function accountVerified(string $vkey){
+        if($vkey == null || $vkey == ''){
+            throw new \Exception('V Key cannot be empty!');
+        }
+
+        try{
+            if($this->userRepository->searchVkeyNotVerified($vkey)){
+                $this->userRepository->verified($vkey);
+                return 'Success Verified';
+            }else{
+                throw new \Exception('Key not valid or account already verified');
+            }
+        } catch (\Exception $ex){
+            throw $ex;
         }
     }
 }

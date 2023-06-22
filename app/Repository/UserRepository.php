@@ -52,7 +52,7 @@ class UserRepository{
      * mencari data di database dengan email
      */
     public function findByEmail(string $email): ?User{
-        $stmt = $this->connection->prepare('SELECT email, password FROM account WHERE email = ?');
+        $stmt = $this->connection->prepare('SELECT email, password, verified, access_level FROM account WHERE email = ?');
         $stmt->execute([$email]);
 
         try{
@@ -61,7 +61,8 @@ class UserRepository{
                 $user = new User;
                 $user->userEmail = $row['email'];
                 $user->userPassw = $row['password'];
-                $user->userLevel = 'user-level';
+                $user->userData  = $row['verified'];
+                $user->userLevel = $row['access_level'];
 
                 // return value Obj
                 return $user;
@@ -112,5 +113,37 @@ class UserRepository{
         $stmt->execute([$user->userPassw, $user->userEmail]);
 
         return $user;
+    }
+
+    /**
+     * Verified Account
+     * 
+     * Update data account untuk verifikasi
+     */
+    public function verified(string $vkey): bool{
+        $stmt = $this->connection->prepare('UPDATE account SET verified = ? WHERE vkey = ?');
+        $stmt->execute([1, $vkey]);
+
+        return true;
+    }
+
+    /**
+     * Search V-Key
+     * 
+     * Mencari V Key pada DB yang belum verified
+     */
+    public function searchVkeyNotVerified(string $vkey): bool | string{
+        $stmt = $this->connection->prepare('SELECT vkey FROM account WHERE vkey = ? AND verified = ?');
+        $stmt->execute([$vkey, 0]);
+
+        try{
+            if($row = $stmt->fetch()){
+                return $row['vkey'];
+            }else{
+                return false;
+            }
+        } finally {
+            $stmt->closeCursor();
+        }
     }
 }
