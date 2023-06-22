@@ -3,6 +3,7 @@
 namespace PalaganTeam\MuhKansai\Service;
 
 use PalaganTeam\MuhKansai\App\DotEnv;
+use PalaganTeam\MuhKansai\App\EmailSend;
 use PalaganTeam\MuhKansai\Config\Database;
 use PalaganTeam\MuhKansai\Domain\User;
 use PalaganTeam\MuhKansai\Model\User\UserLoginRequest;
@@ -76,7 +77,7 @@ class UserService{
 
             // check email
             if($this->userRepository->findByEmail($req->email) != null){
-                throw new \Exception('Email sudah pernah dibuat');
+                throw new \Exception('Email already created');
             }
 
             $user = new User;
@@ -91,6 +92,48 @@ class UserService{
 
             $this->userRepository->saveAccount($user, $vkey);
             $this->userRepository->saveAccountDetails($user, date('Y/m/d H:i:s'));
+
+            // body massage html
+            $body = $body = <<<HTML
+            <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <style>
+                        *{
+                            padding: 0;
+                            margin: 0;
+                        }
+                        .container{
+                            background-color: rgb(103, 199, 43);
+                            text-align: center;
+                            height: 50vh;
+                            padding-top: 4rem;
+                        }a{
+                            padding: .5rem 1rem;
+                            border: 1px solid rgb(72, 131, 184);
+                            border-radius: .5rem;
+                            text-decoration: none;
+                            background: rgb(72, 131, 184);
+                            color: #000;
+                        }a:hover{
+                            opacity: .9;
+                            border-color: #fff;
+                        }p{
+                            margin-bottom: 2rem;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <h1>Email</h1>
+                        <p>Click the link below to validate your account</p>
+                        <a href="http://localhost/PalaganTeam-MuhKansai/test/index.html?key=$vkey">Validate Email</a>
+                    </div>
+                </body>
+            </html>
+        HTML;
+
+            EmailSend::sendEmail($user->userEmail, 'account verification', $body);
             Database::commitTransaction();
         } catch(\Exception $ex){
             Database::rollbackTransaction();
