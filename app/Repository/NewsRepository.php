@@ -55,7 +55,7 @@ class NewsRepository{
      * ambil semua news berdasarkan tanggal secara DESC
      */
     public function getAllNewsDESC(): array | null{
-        $stmt = $this->connection->prepare('SELECT * FROM news ORDER BY tanggal_pembuatan DESC');
+        $stmt = $this->connection->prepare('SELECT * FROM news ORDER BY id DESC');
         $stmt->execute();
 
         try{
