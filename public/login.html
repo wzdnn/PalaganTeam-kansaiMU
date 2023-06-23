@@ -17,32 +17,35 @@
       <div class="row border rounded-5 p-3 bg-white shadow box-area">
         <div class="col">
           <div class="row align-items-center">
-            <div class="header-text mb-4">
-              <h1>SELAMAT DATANG</h1>
+            <div class="header-text mt-4">
+              <h3>Hi, Welcome Back</h3>
             </div>
-            <form action="index.html" method="post" name="form" onsubmit="return validated()">
+            <div class="header-text mb-4">
+              <p class="text-color-base text-center">It's Good To See You Again</p>
+            </div>
+            <form action="index.html" method="post" name="form" onsubmit="return validated()" class="py-5">
               <div class="form-floating mb-3">
                 <input autocomplete="off" type="email" name="email" class="form-control" id="floatingInput" placeholder=" Email" />
-                <label for="floatingInput" style="color: #4048be"> Email address </label>
+                <label for="floatingInput" class="text-color-base"> Email address </label>
                 <div class="email_error" id="email_error">Silahkan isi email terlebih dahulu</div>
               </div>
               <div class="form-floating">
                 <input type="password" name="password" class="form-control" id="floatingPassword" placeholder=" Password" />
-                <label for="floatingPassword" style="color: #4048be"> Password </label>
+                <label for="floatingPassword" class="text-color-base"> Password </label>
                 <div class="password_error" id="password_error">Silahkan isi password terlebih dahulu</div>
               </div>
               <div class="input-group mt-3 mb-3 d-flex justify-content-end">
                 <div class="forgot">
-                  <small><a href="#">Lupa Password?</a></small>
+                  <small><a href="#">Forgot Password?</a></small>
                 </div>
               </div>
-              <div class="input-group mb-3">
-                <button type="submit" class="btn btn-lg btn-primary w-100 fs-6">Login</button>
+              <div class="input-group mb-3 justify-content-center my-5">
+                <button type="submit" class="btn btn-lg btn-primary w-50 fs-6 shadow">Login</button>
               </div>
             </form>
 
             <div class="row">
-              <small>Belum menjadi anggota? <a href="#">Daftar</a></small>
+              <small>Not a member? <a href="register.html">Register</a></small>
             </div>
           </div>
         </div>
