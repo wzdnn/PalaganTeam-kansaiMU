@@ -1,9 +1,11 @@
 <?php
 namespace PalaganTeam\MuhKansai\Service;
 
+use Exception;
 use PalaganTeam\MuhKansai\App\DotEnv;
 use PalaganTeam\MuhKansai\Domain\News;
 use PalaganTeam\MuhKansai\Model\News\NewsCreateRequest;
+use PalaganTeam\MuhKansai\Model\News\NewsDeleteRequest;
 use PalaganTeam\MuhKansai\Model\News\NewsUpdateRequest;
 use PalaganTeam\MuhKansai\Repository\NewsRepository;
 
@@ -50,7 +52,7 @@ class NewsService{
             $news->dateCreate = date('Y/m/d H:i:s');
 
             $this->newsRepo->save($news);
-        } catch (\Exception $ex){
+        } catch (Exception $ex){
             throw $ex;
         }
     }
@@ -60,19 +62,19 @@ class NewsService{
      */
     private function createValidation(NewsCreateRequest $req){
         if($req->newsTitle == null || $req->newsTitle == ''){
-            throw new \Exception('news title cannot be empty');
+            throw new Exception('news title cannot be empty');
         }
 
         if($req->newsImage == null || $req->newsImage['size'] == 0){
-            throw new \Exception('image cannot be empty');
+            throw new Exception('image cannot be empty');
         }else if(!array_keys(['jpeg', 'jpg', 'png', 'webp', 'heif'], pathinfo($req->newsImage['name'], PATHINFO_EXTENSION))){
-            throw new \Exception('image only support jpeg/jpg, png, webp, heif');
+            throw new Exception('image only support jpeg/jpg, png, webp, heif');
         }else if($req->newsImage['size'] > 1500000){
-            throw new \Exception('maximum size image is 1.5 mb');
+            throw new Exception('maximum size image is 1.5 mb');
         }
 
         if($req->newsDescr == null || $req->newsDescr == ''){
-            throw new \Exception('news description cannot be empty');
+            throw new Exception('news description cannot be empty');
         }
     }
 
@@ -124,9 +126,9 @@ class NewsService{
 
                 $this->newsRepo->update($news);
             }else{
-                throw new \Exception('id news not found');
+                throw new Exception('id news not found');
             }
-        } catch (\Exception $ex){
+        } catch (Exception $ex){
             throw $ex;
         }
     }
@@ -136,22 +138,22 @@ class NewsService{
      */
     public function updateValidation(NewsUpdateRequest $req){
         if($req->idNews == null || $req->idNews == ''){
-            throw new \Exception('id news cannot be empty');
+            throw new Exception('id news cannot be empty');
         }else if(is_string($req->idNews)){
-            throw new \Exception('id news cannot be type of string');
+            throw new Exception('id news cannot be type of string');
         }
         
         if($req->newsTitle == null || $req->newsTitle == ''){
-            throw new \Exception('news title cannot be empty');
+            throw new Exception('news title cannot be empty');
         }
 
         if($req->newsImage['size'] != 0){
             if($req->newsImage == null || $req->newsImage['size'] == 0){
-                throw new \Exception('image cannot be empty');
+                throw new Exception('image cannot be empty');
             }else if(!array_keys(['jpeg', 'jpg', 'png', 'webp', 'heif'], pathinfo($req->newsImage['name'], PATHINFO_EXTENSION))){
-                throw new \Exception('image only support jpeg/jpg, png, webp, heif');
+                throw new Exception('image only support jpeg/jpg, png, webp, heif');
             }else if($req->newsImage['size'] > 1500000){
-                throw new \Exception('maximum size image is 1.5 mb');
+                throw new Exception('maximum size image is 1.5 mb');
             }
 
             $req->imageChange = true;
@@ -164,12 +166,40 @@ class NewsService{
                 $req->newsImage = $thumbnail;
                 $req->imageChange = false;
             }else{
-                throw new \Exception('id news not found');
+                throw new Exception('id news not found');
             }
         }
 
         if($req->newsDescr == null || $req->newsDescr == ''){
-            throw new \Exception('news description cannot be empty');
+            throw new Exception('news description cannot be empty');
+        }
+    }
+
+    /**
+     * Delete News
+     */
+    public function delete(NewsDeleteRequest $req){
+        $this->deleteValidation($req);
+
+        try{
+            if($this->newsRepo->findById($req->idNews) != null){
+                $this->newsRepo->delete($req->idNews);
+            }else{
+                throw new Exception('id news not found');
+            }
+        } catch(Exception $ex){
+            throw $ex;
+        }
+    }
+
+    /**
+     * Delete Validation
+     */
+    private function deleteValidation(NewsDeleteRequest $req){
+        if($req->idNews == null || $req->idNews == ''){
+            throw new Exception('id news cannot be empty');
+        }else if(is_string($req->idNews)){
+            throw new Exception('id news cannot be type of string');
         }
     }
 }

@@ -84,4 +84,14 @@ class NewsRepository{
 
         return true;
     }
+
+    /**
+     * Delete News by Id
+     */
+    public function delete(string $id): bool{
+        $stmt = $this->connection->prepare('DELETE FROM news WHERE id = ?');
+        $stmt->execute([$id]);
+
+        return true;
+    }
 }
