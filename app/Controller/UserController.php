@@ -5,6 +5,7 @@ namespace PalaganTeam\MuhKansai\Controller;
 use PalaganTeam\MuhKansai\App\View;
 use PalaganTeam\MuhKansai\Config\Database;
 use PalaganTeam\MuhKansai\Model\User\UserLoginRequest;
+use PalaganTeam\MuhKansai\Model\User\UserRegisterRequest;
 use PalaganTeam\MuhKansai\Repository\SessionRepository;
 use PalaganTeam\MuhKansai\Repository\UserRepository;
 use PalaganTeam\MuhKansai\Service\SessionService;
@@ -59,14 +60,27 @@ class UserController{
      * GET Register Page
      */
     public function register(){
-
+        View::render('User/user-register');
     }
 
     /**
      * POST Register Page
      */
     public function postRegister(){
+        $request = new UserRegisterRequest;
+        $request->fullname = $_POST['fullname'];
+        $request->email = $_POST['email'];
+        $request->password = $_POST['password'];
+        $request->rePassword = $_POST['repassword'];
 
+        try{
+            $this->userService->register($request);
+            View::redirect('/login');
+        } catch(\Exception $ex){
+            View::render('User/user-register', [
+                'error' => $ex->getMessage()
+            ]);
+        }
     }
 
     /**
