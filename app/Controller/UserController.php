@@ -5,15 +5,23 @@ namespace PalaganTeam\MuhKansai\Controller;
 use PalaganTeam\MuhKansai\App\View;
 use PalaganTeam\MuhKansai\Config\Database;
 use PalaganTeam\MuhKansai\Model\User\UserLoginRequest;
+use PalaganTeam\MuhKansai\Repository\SessionRepository;
 use PalaganTeam\MuhKansai\Repository\UserRepository;
+use PalaganTeam\MuhKansai\Service\SessionService;
 use PalaganTeam\MuhKansai\Service\UserService;
 
 class UserController{
     private UserService $userService;
+    private SessionService $sessionService;
 
     public function __construct() {
-        $repo = new UserRepository(Database::getConnection());
-        $this->userService = new UserService($repo);
+        $connection = Database::getConnection();
+
+        $userRepo = new UserRepository($connection);
+        $this->userService = new UserService($userRepo);
+
+        $sessionRepo = new SessionRepository($connection);
+        $this->sessionService = new SessionService($sessionRepo);
     }
 
     /**
@@ -30,9 +38,15 @@ class UserController{
         $request = new UserLoginRequest;
         $request->email = $_POST['email'];
         $request->password = $_POST['password'];
+        $request->remember = false;
+
+        if(isset($_POST['remember'])){
+            $request->remember = true;
+        }
 
         try{
-            $this->userService->login($request);
+            $data = $this->userService->login($request);
+            $this->sessionService->create($data->email, $data->level, $request->remember);
             View::render('Home/index');
         } catch(\Exception $ex){
             View::render('User/user-login', [
