@@ -47,7 +47,7 @@ class UserService{
         // check password
         if(password_verify($req->password, $user->userPassw)){
             $response = new UserLoginResponse;
-            $response->username = $user->userEmail;
+            $response->email = $user->userEmail;
             $response->level = $user->userLevel;
 
             return $response;
