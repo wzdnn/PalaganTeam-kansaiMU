@@ -65,6 +65,8 @@ class NewsService{
 
         if($req->newsImage == null || $req->newsImage['size'] == 0){
             throw new \Exception('image cannot be empty');
+        }else if(!array_keys(['jpeg', 'jpg', 'png', 'webp', 'heif'], pathinfo($req->newsImage['name'], PATHINFO_EXTENSION))){
+            throw new \Exception('image only support jpeg/jpg, png, webp, heif');
         }else if($req->newsImage['size'] > 1500000){
             throw new \Exception('maximum size image is 1.5 mb');
         }
@@ -146,6 +148,8 @@ class NewsService{
         if($req->newsImage['size'] != 0){
             if($req->newsImage == null || $req->newsImage['size'] == 0){
                 throw new \Exception('image cannot be empty');
+            }else if(!array_keys(['jpeg', 'jpg', 'png', 'webp', 'heif'], pathinfo($req->newsImage['name'], PATHINFO_EXTENSION))){
+                throw new \Exception('image only support jpeg/jpg, png, webp, heif');
             }else if($req->newsImage['size'] > 1500000){
                 throw new \Exception('maximum size image is 1.5 mb');
             }
