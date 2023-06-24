@@ -17,14 +17,14 @@ class UserController{
     }
 
     /**
-     * GET Login
+     * GET Login Page
      */
     public function login(){
         View::render('User/user-login');
     }
 
     /**
-     * POST Login
+     * POST Login Page
      */
     public function postLogin(){
         $request = new UserLoginRequest;
@@ -39,5 +39,47 @@ class UserController{
                 "error" => $ex->getMessage()
             ]);
         }
+    }
+
+    /**
+     * GET Register Page
+     */
+    public function register(){
+
+    }
+
+    /**
+     * POST Register Page
+     */
+    public function postRegister(){
+
+    }
+
+    /**
+     * GET Forget Password Page
+     */
+    public function forget(){
+
+    }
+
+    /**
+     * POST Forget Password Page
+     */
+    public function postForget(){
+
+    }
+
+    /**
+     * GET Reset Password Page
+     */
+    public function resetPassword(string $vkey){
+
+    }
+
+    /**
+     * POST Reset Password Page
+     */
+    public function postResetPassword(string $vkey){
+
     }
 }
