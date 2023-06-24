@@ -146,4 +146,37 @@ class UserRepository{
             $stmt->closeCursor();
         }
     }
+
+    /**
+     * Search V Key
+     * 
+     * Mencari V Key pada DB, retun berupa email
+     * @return string 
+     */
+    public function searchVKey(string $vkey): ?string{
+        $stmt = $this->connection->prepare('SELECT email FROM account WHERE vkey = ?');
+        $stmt->execute([$vkey]);
+
+        try{
+            if($row = $stmt->fetch()){
+                return $row['email'];
+            }else{
+                return null;
+            }
+        } finally{
+            $stmt->closeCursor();
+        }
+    }
+
+    /**
+     * Update V key token By email
+     * 
+     * Membuat v key token baru berdasarkan email
+     */
+    public function updateVkey(string $email, string $vkey): bool{
+        $stmt = $this->connection->prepare('UPDATE account SET vkey = ? WHERE email = ?');
+        $stmt->execute([$vkey, $email]);
+
+        return true;
+    }
 }
