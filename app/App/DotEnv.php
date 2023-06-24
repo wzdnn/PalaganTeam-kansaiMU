@@ -21,7 +21,7 @@ class DotEnv{
      */
     public static function getNewsPath(){
         // news path
-        $path = '/../../public/images/news/';
+        $path = '/../../public/image/news/';
 
         return $path;
     }
