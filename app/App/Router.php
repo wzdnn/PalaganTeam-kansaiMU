@@ -8,12 +8,13 @@ class Router{
      * 
      * Menambahkan Route path URL, sudah dapat membaca RegEx
      */
-    public static function add(string $method, string $path, string $controller, string $function): void{
+    public static function add(string $method, string $path, string $controller, string $function, array $middleware = []): void{
         self::$routes[] = [
             'method' => $method,
             'path' => $path,
             'controller' => $controller,
-            'function' => $function
+            'function' => $function,
+            'middleware' => $middleware
         ];
     }
 
@@ -37,6 +38,12 @@ class Router{
             // define pattern
             $pattern = "#^" . $route['path'] . "$#";
             if(preg_match($pattern, $path, $variabels) && $route['method'] == $method){
+
+                // run middleware
+                foreach($route['middleware'] as $middleware){
+                    $interface = new $middleware;
+                    $interface->before();
+                }
                 // define controller dan function
                 $controller = new $route['controller'];
                 $funtion = $route['function'];
