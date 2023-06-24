@@ -6,7 +6,7 @@ use Exception;
 use PalaganTeam\MuhKansai\Domain\Session;
 use PalaganTeam\MuhKansai\Repository\SessionRepository;
 
-class SessionsService{
+class SessionService{
 
     public static string $COOKIE_NAME = "KANSAI-";
     private SessionRepository $sessionRepo;
