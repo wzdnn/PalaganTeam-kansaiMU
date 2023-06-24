@@ -2,4 +2,4 @@
 /vendor/
 /test
 # disabel track images news
-/public/images/news
+/public/image/news
