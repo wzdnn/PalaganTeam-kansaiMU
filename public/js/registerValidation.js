@@ -17,29 +17,29 @@ function checkInputs() {
   const password2Value = password2.value.trim();
 
   if (namaValue === '') {
-    setErrorFor(nama, 'Nama tidak boleh kosong !');
+    setErrorFor(nama, 'Name Cannot Be Blank !');
   } else {
     setSuccessFor(nama);
   }
 
   if (emailValue === '') {
-    setErrorFor(email, 'Email tidak boleh kosong !');
+    setErrorFor(email, 'Email Cannot Be Blank !');
   } else if (!isEmail(emailValue)) {
-    setErrorFor(email, 'Email tidak valid !');
+    setErrorFor(email, 'Email Is Not Valid !');
   } else {
     setSuccessFor(email);
   }
 
   if (passwordValue === '') {
-    setErrorFor(password, 'Password tidak boleh kosong !');
+    setErrorFor(password, 'Password Cannot Be Blank !');
   } else {
     setSuccessFor(password);
   }
 
   if (password2Value === '') {
-    setErrorFor(password2, 'Password tidak boleh kosong !');
+    setErrorFor(password2, 'Password Cannot Be Blank !');
   } else if (passwordValue !== password2Value) {
-    setErrorFor(password2, 'Password tidak sama !');
+    setErrorFor(password2, 'Password Do Not Match !');
   } else {
     setSuccessFor(password2);
   }

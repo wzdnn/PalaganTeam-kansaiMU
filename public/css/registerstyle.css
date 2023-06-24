@@ -1,11 +1,48 @@
+:root {
+  --base: #1e73be;
+  --primary: #ffffff;
+  --secondary: #777777;
+}
+
 body {
-  background: #1e73be;
   font-family: Helvetica, sans-serif;
+
+  /* // Small devices (landscape phones, 576px and up) */
+  @media (min-width: 576px) {
+  }
+
+  /* // Medium devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+  }
+
+  /* // Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+  }
+
+  /* // X-Large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {
+  }
+
+  /* // XX-Large devices (larger desktops, 1400px and up) */
+  @media (min-width: 1400px) {
+  }
 }
 
 h1 {
   text-align: center;
   font-weight: 900em;
+}
+
+.box-area {
+  width: 50%;
+}
+
+.text-color-base {
+  color: var(--secondary);
+}
+
+.text-center {
+  text-align: center;
 }
 
 .form-floating i {
@@ -41,4 +78,19 @@ h1 {
 
 .form-floating.error input {
   border-color: #be2020;
+}
+
+/* Responsive */
+
+@media only screen and (max-width: 768px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .box-area {
+    margin: 0 10px;
+    width: 100%;
+  }
 }
