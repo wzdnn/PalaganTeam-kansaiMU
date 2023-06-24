@@ -17,6 +17,8 @@ class MustLoginMiddleware implements Middleware{
     public function before(): void{
         if($this->sessionService->current() == null){
             throw new \Exception('belum login');
+        }else{
+            throw new \Exception('sudah login');
         }
     }
 }
