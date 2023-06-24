@@ -14,45 +14,48 @@
   </head>
   <body>
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
-      <div class="row border rounded-5 p-3 bg-white shadow box-area">
-        <div class="col">
+      <div class="row-md border rounded-5 p-3 bg-white shadow box-area">
+        <div class="col-md">
           <div class="row align-items-center">
-            <div class="header-text mb-4">
-              <h1>Daftar Akun</h1>
+            <div class="header-text py-4">
+              <h1>Create An Account</h1>
             </div>
             <form action="" method="post" name="form" id="form">
               <div class="form-floating mb-3">
                 <input type="text" id="nama" class="form-control" placeholder="Nama" />
-                <label for="floatingInput" style="color: #4048be"> Nama Lengkap </label>
+                <label for="floatingInput" class="text-color-base"> Full Name </label>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
-                <small>Silahkan Diisi</small>
+                <small>Please Fill In</small>
               </div>
               <div class="form-floating mb-3">
                 <input type="email" id="email" class="form-control" placeholder=" Email" />
-                <label for="floatingInput" style="color: #4048be"> Email </label>
+                <label for="floatingInput" class="text-color-base"> Email </label>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
-                <small>Silahkan Diisi</small>
+                <small>Please Fill In</small>
               </div>
               <div class="form-floating mb-3">
                 <input type="password" id="password" class="form-control" placeholder=" Password" />
-                <label for="floatingPassword" style="color: #4048be"> Password </label>
+                <label for="floatingPassword" class="text-color-base"> Password </label>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
-                <small>Silahkan Diisi</small>
+                <small>Please Fill In</small>
               </div>
               <div class="form-floating mb-5">
                 <input type="password" id="password2" class="form-control" placeholder=" Password" />
-                <label for="floatingPassword" style="color: #4048be"> Ulangi Password </label>
+                <label for="floatingPassword" class="text-color-base"> Re-Password </label>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
-                <small>Silahkan Diisi</small>
+                <small>Please Fill In</small>
               </div>
-              <div class="input-group mb-3 mt-5">
-                <button type="submit" class="btn btn-lg btn-primary w-100 fs-6">Daftar</button>
+              <div class="input-group mb-5 mt-5">
+                <button type="submit" class="btn btn-lg btn-primary w-100 fs-6">Register</button>
               </div>
             </form>
+            <div class="row">
+              <a class="text-color-base" href="login.html">Back To Login</a>
+            </div>
           </div>
         </div>
       </div>
