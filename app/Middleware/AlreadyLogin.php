@@ -1,13 +1,11 @@
 <?php
 
 namespace PalaganTeam\MuhKansai\Middleware;
-
 use PalaganTeam\MuhKansai\App\View;
 use PalaganTeam\MuhKansai\Config\Database;
 use PalaganTeam\MuhKansai\Repository\SessionRepository;
 use PalaganTeam\MuhKansai\Service\SessionService;
-
-class MustLoginMiddleware implements Middleware{
+class AlreadyLogin implements Middleware{
     private SessionService $sessionService;
 
     public function __construct() {
@@ -16,8 +14,9 @@ class MustLoginMiddleware implements Middleware{
         $this->sessionService = new SessionService($sessionRepo);
     }
     public function before(): void{
-        if($this->sessionService->current() == null){
-            View::redirect('/login');
+        if($this->sessionService->current() != null){
+            // dashboard
+            View::redirect('/');
         }
     }
 }
