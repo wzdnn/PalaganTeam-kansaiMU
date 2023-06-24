@@ -72,4 +72,16 @@ class NewsRepository{
             $stmt->closeCursor();
         }
     }
+
+    /**
+     * Update News by ID
+     * 
+     * Update news berdasarkan ID data
+     */
+    public function update(News $news): bool{
+        $stmt = $this->connection->prepare('UPDATE news SET news_title = ?, news_details = ?, news_history = ? WHERE id = ?');
+        $stmt->execute([$news->newsTitle, $news->newsDetails, $news->newsHistory, $news->newsId]);
+
+        return true;
+    }
 }
