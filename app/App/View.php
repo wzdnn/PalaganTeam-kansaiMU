@@ -20,7 +20,7 @@ class View{
      * Beralih kehalaman yang dituju yang sudah terdaftar pathnya
      */
     public static function redirect(string $pathUrl){
-        header("location: " . $pathUrl . ".php");
+        header("location: " . $pathUrl);
         exit();
     }
 }
