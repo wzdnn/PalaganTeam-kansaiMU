@@ -47,4 +47,18 @@ class SessionService{
 
         setcookie(self::$COOKIE_NAME, "", 1, "/");
     }
+
+    /**
+     * Get session from client
+     */
+    public function current(){
+        $sessionIdGet = $_COOKIE[self::$COOKIE_NAME] ?? "";
+
+        $session = $this->sessionRepo->findById($sessionIdGet);
+        if($session == null){
+            return null;
+        }
+
+        return $session->emailSessions;
+    }
 }
