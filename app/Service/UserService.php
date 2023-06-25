@@ -94,6 +94,8 @@ class UserService{
             // vkey generate
             $vkey = md5(time() . $req->email);
 
+            // signature
+            $dummy = md5(md5(time()));
             DotEnv::getTimezoneArea();
 
             $this->userRepository->saveAccount($user, $vkey);
@@ -114,7 +116,7 @@ class UserService{
                             text-align: center;
                             height: 50vh;
                             padding-top: 4rem;
-                        }a{
+                        }.btn{
                             padding: .5rem 1rem;
                             border: 1px solid rgb(72, 131, 184);
                             border-radius: .5rem;
@@ -131,9 +133,10 @@ class UserService{
                 </head>
                 <body>
                     <div class="container">
-                        <h1>Email</h1>
-                        <p>Click the link below to validate your account</p>
-                        <a href="http://localhost/PalaganTeam-MuhKansai/test/index.html?key=$vkey">Validate Email</a>
+                        <h1>Hello</h1>
+                        <p>Please click the button below to verify your account</p>
+                        <a class="btn" href="http://localhost:8080/account/verified/$vkey?email=$user->userEmail&signature=$dummy">verify account</a>
+                        <p style="margin-top: 2rem; text-align: left;">If you're having trouble clicking the "verify account" button, copy and paste the URL below into your web browser: <a href="http://localhost:8080/account/verified/$vkey?email=$user->userEmail&signature=$dummy">http://localhost:8080/account/verified/$vkey?email=$user->userEmail&signature=$dummy</a></p>
                     </div>
                 </body>
             </html>
