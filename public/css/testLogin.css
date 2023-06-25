@@ -4,9 +4,6 @@
   --secondary: #777777;
 }
 
-/* // X-Small devices (portrait phones, less than 576px) */
-/* // No media query for `xs` since this is the default in Bootstrap */
-
 body {
   background: var(--primary);
   font-family: Helvetica, sans-serif;
@@ -42,24 +39,20 @@ h6 {
   font-weight: 900em;
 }
 
-.text-color-base {
+.text-color-secondary {
   color: var(--secondary);
 }
 
-.text-color-highlight {
+.text-color-base {
   color: var(--base);
 }
 
-.text-center {
-  text-align: center;
-}
-
 .box-area {
-  width: 50%;
+  width: 930px;
 }
 
-::placeholder {
-  font-size: 16px;
+.bg-color-base {
+  background-color: var(--base);
 }
 
 .form-floating .email_error,
@@ -75,15 +68,30 @@ h6 {
   display: none;
 }
 
+/* Right Box */
+
+.right-box {
+  padding: 40px 30px 40px 40px;
+}
+
+/* Left Box */
+
+.left-box {
+  font-size: 16px;
+}
+
 /* Responsive */
 
 @media only screen and (max-width: 768px) {
-  body {
-    display: flex;
-  }
-
   .box-area {
     margin: 0 10px;
-    width: 100%;
+    display: flex;
+  }
+  .left-box {
+    height: 100px;
+    overflow: hidden;
+  }
+  .right-box {
+    padding: 20px;
   }
 }

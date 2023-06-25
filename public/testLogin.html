@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/testLogin.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <!-- <link rel="stylesheet" href="./css/bootstrap.min.css" /> -->
+  </head>
+  <body>
+    <!-- Main Container -->
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+      <!-- Login Container -->
+      <div class="row border rounded-5 p-3 bg-white shadow box-area">
+        <!-- Left Box -->
+        <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box bg-color-base">
+          <div class="featured-image mb-3">
+            <img src="./image/loginside.jpg" class="img-fluid" style="width: 250px" alt="loginImage" />
+            <p class="text-center text-white fs-2" style="font-weight: 500">Be Verified</p>
+            <small class="text-white text-wrap text-center" style="width: 17rem">Join Experienced Designers on this platform</small>
+          </div>
+        </div>
+        <!-- Right Box -->
+        <div class="col-md-6 right-box">
+          <div class="row align-items-center">
+            <div class="header-text mb-4">
+              <h2 class="text-center">Hi, Welcome Back</h2>
+              <p class="text-center text-color-secondary">It's Good To See You Again</p>
+            </div>
+            <form action="index.html" method="post" name="form" onsubmit="return validated()">
+              <div class="form-floating">
+                <input autocomplete="off" type="email" name="email" class="form-control" id="floatingInput" placeholder=" Email" />
+                <label for="floatingInput" class="text-color-secondary"> Email address </label>
+                <div class="email_error" id="email_error">Please fill your e-mail</div>
+              </div>
+              <div class="form-floating my-5">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder=" Password" />
+                <label for="floatingPassword" class="text-color-secondary"> Password </label>
+                <div class="password_error" id="password_error">Please fill your password</div>
+              </div>
+              <div class="input-group d-flex justify-content-end">
+                <div class="forgot mb-3">
+                  <small><a href="forgotPassword.html">Forgot Password?</a></small>
+                </div>
+              </div>
+              <div class="input-group justify-content-center mt-2 mb-2">
+                <button type="submit" class="btn btn-lg btn-primary w-50 fs-6 shadow">Login</button>
+              </div>
+            </form>
+            <div class="row">
+              <small>Don't have account ? <a href="register.html">Sign Up</a></small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS Start -->
+    <script src="./js/loginValidation.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
