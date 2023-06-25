@@ -75,7 +75,9 @@ class UserController{
 
         try{
             $this->userService->register($request);
-            View::redirect('/login');
+            View::render('User/succses-create-account', [
+                'email' => $request->email
+            ]);
         } catch(\Exception $ex){
             View::render('User/user-register', [
                 'error' => $ex->getMessage()
