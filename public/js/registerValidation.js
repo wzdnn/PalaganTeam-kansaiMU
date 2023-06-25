@@ -8,6 +8,7 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   checkInputs();
+  form.submit();
   return;
 });
 
@@ -33,13 +34,15 @@ function checkInputs() {
 
   if (passwordValue === '') {
     setErrorFor(password, 'Password Cannot Be Blank !');
-  } else {
+  }else if (passwordValue.length < 5){
+    setErrorFor(password, 'Password length must be more than 5 letters !');
+  }else {
     setSuccessFor(password);
   }
 
   if (password2Value === '') {
     setErrorFor(password2, 'Password Cannot Be Blank !');
-  } else if (passwordValue !== password2Value) {
+  } else if (passwordValue != password2Value) {
     setErrorFor(password2, 'Password Do Not Match !');
   } else {
     setSuccessFor(password2);
@@ -58,7 +61,6 @@ function setErrorFor(input, message) {
 function setSuccessFor(input) {
   const formFloating = input.parentElement;
   formFloating.className = 'form-floating success';
-  form.submit();
 }
 
 function isEmail(email) {
