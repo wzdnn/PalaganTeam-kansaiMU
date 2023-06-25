@@ -23,16 +23,16 @@
               <p class="text-center"><?= $response['error'] ?></p>
               <?php }?>
             </div>
-            <form action="login.html" method="post" name="form" id="form" onsubmit="return validated()">
+            <form method="post" name="form" id="form" onsubmit="return validated()">
               <div class="form-floating mb-3">
-                <input type="text" id="nama" name="fullname" class="form-control" placeholder="Nama" />
+                <input type="text" id="nama" name="fullname" class="form-control" placeholder="Nama" value="<?php if(isset($_POST['fullname'])) echo $_POST['fullname']?>" />
                 <label for="floatingInput" class="text-color-base"> Full Name </label>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <small>Please Fill In</small>
               </div>
               <div class="form-floating mb-3">
-                <input type="email" id="email" name="email" class="form-control" placeholder=" Email" />
+                <input type="email" id="email" name="email" class="form-control" placeholder=" Email" value="<?php if(isset($_POST['email'])) echo $_POST['email']?>"/>
                 <label for="floatingInput" class="text-color-base"> Email </label>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
