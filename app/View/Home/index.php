@@ -22,13 +22,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar ms-auto">
-            <a class="nav-link nav-link-grow-up text-color-base" href="#">Home</a>
+            <a class="nav-link nav-link-grow-up text-color-base" href="/">Home</a>
             <a class="nav-link nav-link-grow-up text-color-base" href="#">News</a>
-            <a class="nav-link nav-link-grow-up text-color-base" href="#">Today Activity</a>
+            <a class="nav-link nav-link-grow-up text-color-base" href="#activity">Today Activity</a>
             <a class="nav-link nav-link-grow-up text-color-base" href="#">About Muhammadiyah</a>
           </div>
           <div>
-            <a class="nav-link nav-link-grow-up text-color-base" href="login.html">Login</a>
+            <a class="nav-link nav-link-grow-up text-color-base" href="/login">Login</a>
           </div>
         </div>
       </div>

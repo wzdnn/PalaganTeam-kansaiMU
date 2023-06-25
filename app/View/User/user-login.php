@@ -28,7 +28,7 @@
             </div>
             <form method="post" name="form" onsubmit="return validated()" class="py-5">
               <div class="form-floating mb-3">
-                <input autocomplete="off" type="email" name="email" class="form-control" id="floatingInput" placeholder=" Email" />
+                <input autocomplete="off" type="email" name="email" class="form-control" id="floatingInput" placeholder=" Email" value="<?php if(isset($_POST['email'])) echo $_POST['email']?>" />
                 <label for="floatingInput" class="text-color-base"> Email address </label>
                 <div class="email_error" id="email_error">Silahkan isi email terlebih dahulu</div>
               </div>

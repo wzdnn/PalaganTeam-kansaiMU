@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <!-- LINK Start-->
-    <link rel="stylesheet" href="./css/aos.css" />
-    <link rel="stylesheet" href="./css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./css/line-awesome.min.css" />
-    <link rel="stylesheet" href="./css/loginstyle.css" />
+    <link rel="stylesheet" href="<?= ROOT?>/css/aos.css" />
+    <link rel="stylesheet" href="<?= ROOT?>/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?= ROOT?>/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="<?= ROOT?>/css/loginstyle.css" />
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" /> -->
     <!-- LINK END -->
   </head>
@@ -32,9 +32,9 @@
     </div>
 
     <!-- JS Script Start -->
-    <script src="./js/bootstrap.bundle.min.js"></script>
-    <script src="./js/aos.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="<?= ROOT?>/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= ROOT?>/js/aos.js"></script>
+    <script src="<?= ROOT?>/js/main.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> -->
     <!-- JS Script End -->
   </body>
