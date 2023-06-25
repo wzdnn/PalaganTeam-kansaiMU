@@ -8,6 +8,7 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   checkInputs();
+  return;
 });
 
 function checkInputs() {
@@ -57,6 +58,7 @@ function setErrorFor(input, message) {
 function setSuccessFor(input) {
   const formFloating = input.parentElement;
   formFloating.className = 'form-floating success';
+  form.submit();
 }
 
 function isEmail(email) {

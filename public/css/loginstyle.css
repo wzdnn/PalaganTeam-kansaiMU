@@ -46,6 +46,10 @@ h6 {
   color: var(--secondary);
 }
 
+.text-color-highlight {
+  color: var(--base);
+}
+
 .text-center {
   text-align: center;
 }
