@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+
+    <!-- Link Start -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/line-awesome.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/dashboard.css" />
+    <!-- Link End -->
+  </head>
+  <body id="home">
+    <!-- Side Bar Start -->
+    <div class="menu-btn">
+      <i class="las la-bars"></i>
+    </div>
+    <div class="side-bar">
+      <div class="close-btn">
+        <i class="las la-times"></i>
+      </div>
+      <div class="menu">
+        <div class="item">
+          <a href="#"> <i class="las la-desktop"></i>Dashboard </a>
+        </div>
+        <div class="item">
+          <a class="sub-btn"> <i class="las la-newspaper"></i>News<i class="las la-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <a href="#" class="sub-item">Sub Item 1</a>
+            <a href="#" class="sub-item">Sub Item 2</a>
+            <a href="#" class="sub-item">Sub Item 3</a>
+          </div>
+        </div>
+        <div class="item">
+          <a class="sub-btn"> <i class="las la-bell"></i>Activity<i class="las la-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <a href="#" class="sub-item">Sub Item 1</a>
+            <a href="#" class="sub-item">Sub Item 2</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Side Bar End -->
+    <!-- Content Wrapper -->
+    <section class="main">
+      <h1>Apa tu Man</h1>
+    </section>
+    <!-- Content Wrapper -->
+
+    <!-- JS Start  -->
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    <!-- Dropdown Button -->
+    <script type="text/javascript">
+      $(document).ready(function () {
+        // Jquery for Toggle sub menus
+        $('.sub-btn').click(function () {
+          $(this).next('.sub-menu').slideToggle();
+          $(this).find('.dropdown').toggleClass('rotate');
+        });
+
+        // Jquery for expand and collapse the sidebar
+        $('.menu-btn').click(function () {
+          $('.side-bar').addClass('active');
+          $('.menu-btn').css('visibility', 'hidden');
+        });
+
+        $('.close-btn').click(function () {
+          $('.side-bar').removeClass('active');
+          $('.menu-btn').css('visibility', 'visible');
+        });
+      });
+    </script>
+
+    <!-- JS End -->
+  </body>
+</html>
