@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Activity</title>
 
     <!-- Link Start -->
 
@@ -12,54 +11,105 @@
     <link rel="stylesheet" href="./css/style.css" />
 
     <!-- Link End -->
+
+    <title>Judul Activity</title>
   </head>
-  <body id="body">
+  <body>
+    <!-- Navbar Start -->
+    <header>
+      <nav class="navbar navbar-expand-lg shadow-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#"><span class="h3 fw-bold text-color-base">HIDAYAH</span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link nav-link-grow-up text-color-base" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-link-grow-up text-color-base" href="#news">News</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-link-grow-up text-color-base" href="#activity">Today Activity</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-link-grow-up text-color-base" href="#">About Muhammadiyah</a>
+              </li>
+            </ul>
+            <div>
+              <a class="nav-link nav-link-grow-up text-color-base" href="login.html">Login</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- Navbar End -->
+
     <!-- Content Wrapper Start -->
-    <div class="container py-lg-5 px-lg-5 border rounded justify-content-center align-items-center text-color-odds shadow-sm">
-      <div class="row justify-content-center align-items-center">
-        <div>
-          <h1 class="mb-3">Activity Board</h1>
+    <div class="content-wrapper">
+      <section class="px-lg-5 py-lg-5 mt-5" id="bodyNews">
+        <div class="container">
+          <div class="row">
+            <div>
+              <h1 class="text-color-odds" id="judulNews">Judul Berita</h1>
+              <p class="text-color-base fw-lighter" id="dateNews">tanggal</p>
+              <p class="text-color-odds text-decoration-none fs-6 fst-italic" id="publisherNews">Published by (nama penulis)</p>
+            </div>
+            <hr />
+            <div class="justify-content-center">
+              <div class="text-center my-4">
+                <img src="./image/news/news-1.jpg" alt="news-thumbnail" id="newsThumb" class="img-thumbnail shadow-sm" />
+              </div>
+              <div class="mb-3">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta tempore asperiores, earum dignissimos, harum amet eum tempora inventore quasi voluptatem dolorum quo laudantium aliquid veniam rem, vitae a officia
+                  perferendis.
+                </p>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <p class="text-color-base fw-lighter" id="dateNews">tanggal</p>
+            </div>
+            <div class="d-flex justify-content-end">
+              <p class="text-color-odds text-decoration-none fs-6 fst-italic" id="publisherNews">Published by (nama penulis)</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="d-flex">
+              <h2><i class="las la-comments"></i> Comments</h2>
+            </div>
+            <div></div>
+          </div>
+          <hr />
+          <!-- Comment Box Start -->
+          <div class="container-fluid" id="commentSection">
+            <div class="row box-area rounded-lg shadow-sm">
+              <div class="justify-content-evenly">
+                <span class="fw-medium" id="userName">Nama User</span>
+                <p class="text-color-base fs-6" id="dateComment">tanggal</p>
+                <p id="isiComment">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora, explicabo quae expedita cum aut laudantium unde perspiciatis blanditiis nemo aperiam officiis ipsam non quia reprehenderit, velit, itaque reiciendis odit
+                  eveniet.
+                </p>
+              </div>
+              <hr />
+              <div class="justify-content-evenly">
+                <span class="fw-medium" id="userName">Nama User</span>
+                <p class="text-color-base fs-6" id="dateComment">tanggal</p>
+                <p id="isiComment">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora, explicabo quae expedita cum aut laudantium unde perspiciatis blanditiis nemo aperiam officiis ipsam non quia reprehenderit, velit, itaque reiciendis odit
+                  eveniet.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Comment Box End -->
         </div>
-        <div class="border"></div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">No</th>
-                <th scope="col">Image</th>
-                <th scope="col">Tittle</th>
-                <th scope="col">About</th>
-                <th scope="col">Date</th>
-                <th scope="col">Options</th>
-              </tr>
-            </thead>
-            <tbody class="table-group-divider">
-              <tr>
-                <th scope="row" id="no">1</th>
-                <td>
-                  <img src="" alt="news_image" id="newsImage" />
-                </td>
-                <td id="titleImage">Judul nanti disini</td>
-                <td id="aboutImage">Isi</td>
-                <td id="newsDate">Tanggal</td>
-                <td id="newsOption ">
-                  <button type="button" class="btn btn-primary" id="upload">Upload</button>
-                  <button type="button" class="btn btn-danger" id="delete">Delete</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      </section>
     </div>
     <!-- Content Wrapper End -->
-
-    <!-- JS Start -->
-    <script src="./js/bootstrap.bundle.min.js"></script>
-    <script src="./js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-    <!-- JS End -->
   </body>
 </html>
